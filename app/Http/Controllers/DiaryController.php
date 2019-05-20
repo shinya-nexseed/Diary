@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Diary;
 // ↑require_once('別のファイル');のイケてる版
 
 class DiaryController extends Controller
@@ -13,7 +14,14 @@ class DiaryController extends Controller
         // var_dumpとdieを組み合わせたもの
         // Laravel開発の必須ツールです
 
-        return view('diaries.index');
+        // モデルファイルを使ってデータを取得する
+        $diaries = Diary::all()->toArray();
+        // SELECT * FROM diaries WHERE 1を実行し$diariesに入れる
+        // all()メソッド
+        // CollectionをArrayに変換するtoArray()メソッドをチェインする
+        // dd($diaries);
+
+        return view('diaries.index', ['diaries' => $diaries]);
         // view関数はresources/views/内にあるファイルを取得する関数
         // view('ファイル名')もしくは
         // view('フォルダ名.ファイル名')のように記述する

@@ -5,9 +5,11 @@ Diary 一覧
 @endsection
 
 @section('content')
-  <div class="m-4 p-4 border border-primary">
-    <p>ほげ</p>
-    <p>ほげほげほげほげ</p>
-    <p>2019/xx/yy</p>
-  </div>
+  @foreach($diaries as $diary)
+    <div class="m-4 p-4 border border-primary">
+      <p>{{ $diary['title'] }}</p>
+      <p>{{ $diary['body'] }}</p>
+      <p>{{ $diary['created_at'] }}</p>
+    </div>
+  @endforeach
 @endsection
