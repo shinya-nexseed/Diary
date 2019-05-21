@@ -28,12 +28,35 @@ class DiaryController extends Controller
         // 例）view('welcome')
         // 例）view('diaries.edit')
         // ※ファイル名は.bladeの前のみ
+        // view(③, [② => ①]);
+        // ①の変数を、②の変数名に変えて③のviewへ送る。
     }
 
     public function create() {
+        // 投稿画面
         return view('diaries.create');
     }
+
+    public function store(Request $request) {
+        // 保存処理
+        // POST送信データの受け取り
+        // $_POSTの代わりにRequestクラスを使用します。
+
+        // INSERT INTO テーブル名 (カラム名) VALUE (値)
+        // INSERT INTO diaries (title, body) VALUE ($_POST['title'], $_POST['body'])
+        // INSERT INTO diaries (title, body) VALUE ($request->title, $request->body)
+        // ModelクラスDiaryを使用する
+        $diary = new Diary(); // インスタンス化
+        $diary->title = $request->title;
+        $diary->body = $request->body;
+        $diary->save();
+
+        // 一覧ページに戻る（リダイレクト処理）
+        return redirect()->route('diary.index'); // header()と同じような処理
+    }
 }
+
+
 
 
 
