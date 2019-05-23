@@ -22,6 +22,7 @@ Route::get('diary/create', 'DiaryController@create')->name('diary.create'); // �
 Route::post('diary/create', 'DiaryController@store')->name('diary.create'); // 保存処理
 
 Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy'); // 削除処理
+// {}は対応するメソッドの引数になる
 
 // RESTFul設計
 // GET 取得
