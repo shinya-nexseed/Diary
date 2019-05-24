@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Diary;
 use App\Http\Requests\CreateDiary;
+use Illuminate\Support\Facades\Auth;
 // ↑require_once('別のファイル');のイケてる版
 
 class DiaryController extends Controller
@@ -50,6 +51,7 @@ class DiaryController extends Controller
         $diary = new Diary(); // インスタンス化
         $diary->title = $request->title;
         $diary->body = $request->body;
+        $diary->user_id = Auth::user()->id;
         $diary->save();
 
         // 一覧ページに戻る（リダイレクト処理）

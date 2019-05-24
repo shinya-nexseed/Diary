@@ -18,11 +18,16 @@
 // get('URLリクエスト', '対象コントローラー@対象メソッド')
 Route::get('/', 'DiaryController@index')->name('diary.index'); //追加
 
-Route::get('diary/create', 'DiaryController@create')->name('diary.create'); // 投稿画面
-Route::post('diary/create', 'DiaryController@store')->name('diary.create'); // 保存処理
+Route::group(['middleware' => 'auth'], function(){
+    Route::get('diary/create', 'DiaryController@create')->name('diary.create'); // 投稿画面
+    Route::post('diary/create', 'DiaryController@store')->name('diary.create'); // 保存処理
 
-Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy'); // 削除処理
-// {}は対応するメソッドの引数になる
+    Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy'); // 削除処理
+    // {}は対応するメソッドの引数になる
+});
+
+
+
 
 // RESTFul設計
 // GET 取得
@@ -35,10 +40,7 @@ Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destr
 // localhost:8000/aaa ← PATCH
 // localhost:8000/aaa ← DELETE
 
-
-
-
-
+Auth::routes();
 
 
 
