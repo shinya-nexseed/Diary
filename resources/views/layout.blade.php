@@ -9,6 +9,16 @@
   <link rel="stylesheet" type="text/css" href="/css/navbar.css">
 </head>
 <body>
+  {{-- @authで逆の処理もできる --}}
+  @guest
+    {{-- ログインしていない（ゲスト状態）場合の処理 --}}
+    ゲスト
+  @else
+    {{-- ログインしている場合の処理 --}}
+    ログイン
+    {{ Auth::user()->name }}
+  @endguest
+
   <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
       <div class="container">
           <a class="navbar-brand" href="{{ url('/') }}">

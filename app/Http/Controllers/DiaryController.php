@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 class DiaryController extends Controller
 {
     public function index() {
+        // Authクラス
+        // dd(Auth::user()->name);
+        // dd(Auth::user()->email);
+
         // dd('Hello Laravel');
         // dump and die関数というLaravelに用意された関数
         // var_dumpとdieを組み合わせたもの
@@ -67,6 +71,25 @@ class DiaryController extends Controller
 
         $diary->delete();
         // DELETE FROM テーブル名 WHERE id=?
+
+        return redirect()->route('diary.index');
+    }
+
+    function edit($id) {
+        $diary = Diary::find($id);
+        // SELECT * FROM diaries WHERE id=?
+        // $diaryはCollectionという型でできていて、Arrayに変換するにはtoArray()
+
+        return view('diaries.edit', ['diary' => $diary]);
+    }
+
+    function update($id, CreateDiary $request) {
+        $diary = Diary::find($id); // 1件データ取得
+
+        // $requestがバリデーション機能付きの$_POSTみたいなもの
+        $diary->title = $request->title; // 値上書き
+        $diary->body = $request->body; // 値上書き
+        $diary->save(); // 保存
 
         return redirect()->route('diary.index');
     }
