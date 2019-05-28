@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::delete('diary/{id}/delete', 'DiaryController@destroy')->name('diary.destroy'); // 削除処理
     // {}は対応するメソッドの引数になる
+
+    Route::get('/mypage', 'DiaryController@mypage')->name('diary.mypage');
 });
 
 // RESTFul設計

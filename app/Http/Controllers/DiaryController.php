@@ -93,6 +93,21 @@ class DiaryController extends Controller
 
         return redirect()->route('diary.index');
     }
+
+    function mypage() {
+        // whereメソッドを使ったパターン
+        // $login_user = Auth::user();
+        // $diaries = Diary::where('user_id', 1)->get();
+        // where('カラム名', 値);
+        // SELECT * FROM diaries WHERE カラム名=値
+
+        // Modelのリレーションを使ったパターン
+        $login_user = Auth::user();
+        $diaries = $login_user->diaries;
+        // dd($diaries);
+
+        return view('diaries.mypage', ['diaries' => $diaries]);
+    }
 }
 
 
